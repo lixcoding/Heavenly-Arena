@@ -1,0 +1,28 @@
+- stephany: necessario nerf no slow da poça
+- portrait: incompleto, apenas o de dano foi implementado
+
+
+
+----
+ versao 0.13:
+arma com imagem
+
+ behavior da stephany adicionado.
+
+pipeline definida para combate
+
+erros corrigidos
+
+critico de unarmed adicionado
+
+diferentes formatos de arena add
+
+
+ui de barra de hp feita, preparada para receber portrait e facilmente active
+
+----
+
+versao 0.14
+
+
+

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Heavenly Arena</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/ui.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         JOGO
+    =================================================== -->
+
+    <div class="game-wrapper">
+
+
+        <!-- ======================
+             CANVAS
+        ======================= -->
+
+        <canvas
+            class="game"
+            id="game"
+            width="1000"
+            height="600"
+        >
+        </canvas>
+
+
+
+        <!-- ==================================================
+             HUD
+        =================================================== -->
+
+        <div class="hp-container">
+
+
+            <!-- ==============================================
+                 PLAYER 1
+            =============================================== -->
+
+
+            <!-- PORTRAIT P1 -->
+
+            <div class="portrait portrait-p1">
+
+                <img
+                    id="portrait-p1"
+                    src="../assets/portrait/stephanny/stephannyFramePortrait.png  "
+                    alt=""
+                >
+
+            </div>
+
+
+
+            
+            <div class="hp-area hp-area-p1">
+
+                <div
+                    class="hp-fill"
+                    id="hp-fill-p1">
+                </div>
+
+            </div>
+            <div class="skill-area skill-area-p1">
+
+                <div
+                    class="skill-fill"
+                    id="skill-fill-p1">
+                </div>
+
+            </div>
+
+
+
+
+            <!-- ==============================================
+                 PLAYER 2
+            =============================================== -->
+
+
+            <div class="portrait portrait-p2">
+
+                <img
+                    id="portrait-p2"
+                    src="../assets/portrait/lance/lanceFramePortrait.jpeg"
+                    alt="">
+
+            </div>
+
+            <div class="hp-area hp-area-p2">
+
+                <div
+                    class="hp-fill"
+                    id="hp-fill-p2">
+                </div>
+
+            </div>
+
+
+            <div class="skill-area skill-area-p2">
+
+                <div
+                    class="skill-fill"
+                    id="skill-fill-p2">
+                </div>
+
+            </div>
+
+
+
+
+            <!-- ==============================================
+                 MOLDURA
+            =============================================== -->
+
+            <img
+                class="hp-frame"
+                src="../assets/ui/hpbar/hpframe.png"
+                alt=""
+            >
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+         DATABASE
+    =================================================== -->
+
+    <script src="../scripts/assets.js"></script>
+
+    <script src="../scripts/skill.js"></script>
+
+
+
+    <!-- ==================================================
+         SUB ARCHETYPE SYSTEM
+    =================================================== -->
+
+    <script src="../scripts/subarchetypeSystem.js"></script>
+
+    <script src="../scripts/subarchetypeDB.js"></script>
+
+
+
+    <!-- ==================================================
+         CHARACTERS
+    =================================================== -->
+
+    <script src="../scripts/characters.js"></script>
+
+
+
+    <!-- ==================================================
+         PLAYERS
+    =================================================== -->
+
+    <script src="../scripts/players.js"></script>
+
+
+
+    <!-- ==================================================
+         SKILLS
+    =================================================== -->
+
+    <script src="../scripts/skillFunction.js"></script>
+
+    <script src="../scripts/skillSystem.js"></script>
+
+    <script src="../scripts/skillUpdate.js"></script>
+
+    <script src="../scripts/skillBar.js"></script>
+
+
+
+    <!-- ==================================================
+         EVENTS / EFFECTS / STATES
+    =================================================== -->
+
+    <script src="../scripts/events.js"></script>
+
+    <script src="../scripts/effects.js"></script>
+
+    <script src="../scripts/states.js"></script>
+
+
+
+    <!-- ==================================================
+         COMBAT
+    =================================================== -->
+
+    <script src="../scripts/combat.js"></script>
+
+    <script src="../scripts/colision.js"></script>
+
+
+
+    <!-- ==================================================
+         ARENA / MOVEMENT
+    =================================================== -->
+
+    <script src="../scripts/arena.js"></script>
+
+    <script src="../scripts/movement.js"></script>
+
+
+
+    <!-- ==================================================
+         WEAPON
+    =================================================== -->
+
+    <script src="../scripts/weapon.js"></script>
+
+
+
+    <!-- ==================================================
+         DRAW
+    =================================================== -->
+
+    <script src="../scripts/draw.js"></script>
+
+    <script src="../scripts/weaponDraw.js"></script>
+
+    <script src="../scripts/skillDraw.js"></script>
+
+
+
+    <!-- ==================================================
+         UI
+    =================================================== -->
+
+    <script src="../scripts/ui.js"></script>
+
+
+
+    <!-- ==================================================
+         CORE
+    =================================================== -->
+
+    <script src="../scripts/main.js"></script>
+
+
+</body>
+
+</html>
