@@ -31,6 +31,10 @@ function UpdateHitFlash(player) {
 
 // ==============================
 
+// velocidade mínima que efeitos de redução (poça de veneno,
+// fim de buff de velocidade) deixam o personagem ter
+const MIN_SPEED = 5;
+
 function UpdateLanceActive(player) {
   const active = player.skillObjects.active;
 
@@ -41,7 +45,12 @@ function UpdateLanceActive(player) {
   active.duration--;
 
   if (active.duration <= 0) {
-    player.stats.speed -= active.speedBonus;
+    // se o veneno reduziu a velocidade durante a skill, tirar o bônus
+    // inteiro poderia deixar a velocidade abaixo do mínimo
+    player.stats.speed = Math.max(
+      MIN_SPEED,
+      player.stats.speed - active.speedBonus
+    );
 
     player.weapon.rotationSpeed -= active.rotationBonus;
 
@@ -185,7 +194,12 @@ function UpdatePoisonOutput(player) {
         }
 
         target.poisonTick--;
-        target.skillObjects.poisonPoolCounter.stunTick--;
+        // o contador de stun só avança enquanto o alvo NÃO está stunnado.
+        // Sem isso ele continuava somando durante o próprio stun e o alvo
+        // ficava em loop de stun (60 frames stunnado, 30 livre).
+        if (!IsStunned(target)) {
+            target.skillObjects.poisonPoolCounter.stunTick--;
+        }
 
         // ----------------------
         // STACK DE STUN
@@ -221,8 +235,8 @@ console.log("stun")
           createHitFlash(target, 15, "purple")
             target.stats.speed--;
 
-            if (target.stats.speed < 5) {
-                target.stats.speed = 5;
+            if (target.stats.speed < MIN_SPEED) {
+                target.stats.speed = MIN_SPEED;
             }
 
             console.log(

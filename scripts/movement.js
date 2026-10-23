@@ -420,6 +420,20 @@ function rectangleArenaCollision(ball) {
         arena.height / 2;
 
 
+    /*
+        Em cada parede:
+
+        1. corrigimos a posição (um pouco para dentro)
+        2. delegamos o rebote para reflectArenaDirection,
+           o mesmo usado pelas outras arenas.
+
+        As normais passadas apontam PARA FORA da arena.
+
+        reflectArenaDirection só reflete se o personagem
+        estiver realmente indo para a parede, então ele
+        não é invertido de novo quando já está voltando.
+    */
+
 
     // ======================
     // PAREDE ESQUERDA
@@ -432,17 +446,15 @@ function rectangleArenaCollision(ball) {
 
         ball.x =
             left +
-            ball.radius;
+            ball.radius +
+            ARENA_SAFE_MARGIN;
 
 
-        ball.moveVx *= -1;
-
-
-        ball.physicsVx +=
-            ball.moveVx * 4;
-
-
-        boostWeapon(ball);
+        reflectArenaDirection(
+            ball,
+            -1,
+            0
+        );
     }
 
 
@@ -458,17 +470,15 @@ function rectangleArenaCollision(ball) {
 
         ball.x =
             right -
-            ball.radius;
+            ball.radius -
+            ARENA_SAFE_MARGIN;
 
 
-        ball.moveVx *= -1;
-
-
-        ball.physicsVx +=
-            ball.moveVx * 3;
-
-
-        boostWeapon(ball);
+        reflectArenaDirection(
+            ball,
+            1,
+            0
+        );
     }
 
 
@@ -484,17 +494,15 @@ function rectangleArenaCollision(ball) {
 
         ball.y =
             top +
-            ball.radius;
+            ball.radius +
+            ARENA_SAFE_MARGIN;
 
 
-        ball.moveVy *= -1;
-
-
-        ball.physicsVy +=
-            ball.moveVy * 3;
-
-
-        boostWeapon(ball);
+        reflectArenaDirection(
+            ball,
+            0,
+            -1
+        );
     }
 
 
@@ -510,17 +518,15 @@ function rectangleArenaCollision(ball) {
 
         ball.y =
             bottom -
-            ball.radius;
+            ball.radius -
+            ARENA_SAFE_MARGIN;
 
 
-        ball.moveVy *= -1;
-
-
-        ball.physicsVy +=
-            ball.moveVy * 3;
-
-
-        boostWeapon(ball);
+        reflectArenaDirection(
+            ball,
+            0,
+            1
+        );
     }
 }
 

@@ -1181,27 +1181,39 @@ function orbitWeaponCollision(
     if (distance <= radiusSum) {
 
 
+        // durante o hitCooldown o golpe não conta.
+        // Não invertemos a rotação nesse período, senão a
+        // espada fica vibrando para frente e para trás
+        // dentro do alvo.
 
-        // ======================
-        // INVERTER ROTAÇÃO
-        // ======================
-
-        weapon.rotationDirection *=
-            -1;
-
+        if (attacker.hitCooldown > 0) {
+            return;
+        }
 
 
         // ======================
         // DANO
         // ======================
 
-
+        const hit =
             weaponCombat(
                 attacker,
                 target
             );
 
 
+        // ======================
+        // INVERTER ROTAÇÃO
+        // ======================
+
+        // somente quando o golpe realmente acertou
+        // (esquiva não inverte)
+
+        if (hit) {
+
+            weapon.rotationDirection *=
+                -1;
+        }
     }
 }
 

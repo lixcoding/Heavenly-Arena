@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heavenly Arena — Seleção</title>
+  <link rel="stylesheet" href="../css/selectCharacter.css">
+</head>
+<body>
+  <main class="select-screen">
+    <aside class="edge-settings edge-settings-p1" aria-label="Configurações do jogador 1">
+   <span class="gear">⚙</span><small>Settings</small>
+    </aside>
+    <aside class="edge-settings edge-settings-p2" aria-label="Configurações do jogador 2">
+   <span class="gear">⚙</span><small>Settings</small>
+    </aside>
+
+    <header class="select-header">
+      <button type="button" class="btn btn-back" id="btn-back">‹ Voltar</button>
+      <div class="match-info">
+        arena select
+      </div>
+      <span class="mode-badge" id="mode-label"></span>
+    </header>
+
+    <section class="select-vs" aria-label="Seleção de lutadores">
+      <section class="side side-p1" aria-label="Jogador 1">
+        <div class="character-art" id="preview-p1">
+          <img class="preview-img" id="preview-img-p1" alt="">
+          <div class="art-placeholder" id="placeholder-p1"></div>
+        </div>
+        <div class="fighter-name fighter-name-p1"><span id="preview-name-p1">PLAYER 1</span></div>
+        <div class="fighter-meta"><strong>Estilo de luta</strong><span>Facilidade de uso</span><span class="stars">★★★★☆</span></div>
+        <div class="player-label">PLAYER 1 <span>●</span></div>
+      </section>
+
+      <div class="versus" aria-label="versus">VS</div>
+
+      <section class="side side-p2" aria-label="Jogador 2">
+        <div class="character-art" id="preview-p2">
+          <img class="preview-img" id="preview-img-p2" alt="">
+          <div class="art-placeholder" id="placeholder-p2"></div>
+        </div>
+        <div class="fighter-name fighter-name-p2"><span id="preview-name-p2">PLAYER 2</span></div>
+        <div class="fighter-meta"><strong>Estilo de luta</strong><span>Facilidade de uso</span><span class="stars">★★★★☆</span></div>
+        <div class="player-label">PLAYER 2 <span>●</span></div>
+      </section>
+    </section>
+
+    <section class="roster-area" aria-label="Lista de personagens">
+      <div class="roster-heading"><span>SELECIONE SEU LUTADOR</span><button type="button" id="btn-random" class="random-button">L1　 RANDOM</button><span class="roster-count" id="roster-count">03 FIGHTERS</span></div>
+      <div class="roster" id="roster"></div>
+    </section>
+
+    <footer class="select-footer">
+      <p id="selection-hint">Player 1: escolha seu lutador</p>
+      <button type="button" class="btn btn-start" id="btn-start" disabled>LUTAR　↗</button>
+    </footer>
+  </main>
+  <script src="../scripts/selecao.js"></script>
+</body>
+</html>

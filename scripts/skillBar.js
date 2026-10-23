@@ -1,13 +1,19 @@
 function addActiveMeter(player, value){
 
-player.activeBar +=  value
+    player.activeBar += value
 
+    if(player.activeBar < player.activeBarMax){
+        return;
+    }
 
-if(player.activeBar >= player.activeBarMax){
-player.activeBar = 0;
-
-Active(player)
-}
+    // só gasta a barra se a skill realmente foi ativada.
+    // Se não pôde ser usada (stun, sem alvo envenenado, skill
+    // já ativa...), a barra fica cheia e tenta de novo depois.
+    if(Active(player)){
+        player.activeBar = 0;
+    } else {
+        player.activeBar = player.activeBarMax;
+    }
 }
 
 function addUltimateMeter(player, value){

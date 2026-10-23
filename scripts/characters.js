@@ -41,6 +41,7 @@ const characters = [
 
     archetype: null,
     portrait: assets.portraits.van,
+    hudPortrait: null, // ainda sem arte de moldura para o HUD
     sub_archetype: sub_archetypes.Aggressive,
 
     radius: SIZE.NORMAL,
@@ -87,6 +88,7 @@ const characters = [
     name: "Lance",
     archetype: null,
     portrait: assets.portraits.lance,
+    hudPortrait: "../assets/portrait/lance/lanceFramePortrait.jpeg",
     sub_archetype: sub_archetypes.LanceBehavior,
     radius: SIZE.NORMAL,
 
@@ -150,7 +152,7 @@ const characters = [
     },
 
     skills: {
-      passive: "BloodThirsty",
+      passive: "vampirism",
       active: "SwordDance",
       ultimate: null,
     },
@@ -163,6 +165,7 @@ const characters = [
     name: "Stephany",
     archetype: null,
     portrait: assets.portraits.stephanny,
+    hudPortrait: "../assets/portrait/stephanny/stephannyFramePortrait.png",
     sub_archetype: sub_archetypes.StephannyBehavior,
     radius: SIZE.SMALL,
 

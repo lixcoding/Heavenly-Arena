@@ -4,27 +4,30 @@ const damageText = [];
 function createDamageText(
     x,
     y,
-    damage
+    damage,
+    color
 ){
 
     damageText.push({
         x: x,
         y: y,
         value: damage,
+        color: color || "red",
         life: 60
     })
 }
 
 function drawDamageText(){
     for(const text of damageText){
-ctx.fillStyle = "red";
+ctx.fillStyle = text.color || "red";
 ctx.font = "18px Arial";
 ctx.textAlign = "center"
 
 
 ctx.fillText(
 
-    Math.floor(text.value),
+    // dano abaixo de 1 (ex: veneno) aparece com uma casa decimal
+    text.value >= 1 ? Math.floor(text.value) : text.value.toFixed(1),
     text.x,
     text.y
 )

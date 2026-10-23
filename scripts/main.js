@@ -1,7 +1,7 @@
 // ======================
 // LOOP PRINCIPAL
 // ======================
-
+let game = true;
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d")

@@ -99,14 +99,30 @@ function weaponCombat(attacker, target) {
   // ======================
 
   if (!attacker.weapon) {
-    return;
+    return false;
   }
 
   if (attacker.hitCooldown > 0) {
-    return;
+    return false;
   }
 
   const weapon = attacker.weapon;
+
+  // ======================
+  // 1.5 EVADE
+  // ======================
+
+  // O alvo pode esquivar do golpe de arma.
+  // O cooldown é consumido mesmo assim, senão o evade
+  // seria rolado de novo a cada frame de sobreposição.
+
+  if (checkEvade(target)) {
+    console.log(target.character.name, " dodge");
+
+    attacker.hitCooldown = HIT_COOLDOWN;
+
+    return false;
+  }
 
   // ======================
   // 2. CALCULAR DANO
@@ -196,6 +212,32 @@ function weaponCombat(attacker, target) {
   // ======================
 
   attacker.hitCooldown = HIT_COOLDOWN;
+
+  // golpe acertou
+  return true;
+}
+
+
+// ======================
+// UNARMED HIT (helper)
+// ======================
+
+// Aplica um golpe do unarmedCombat: tira vida, mostra o número
+// e gera os eventos genéricos de dano (portrait de dor, passivas,
+// etc), igual aos outros tipos de ataque.
+
+function unarmedHit(attacker, target, amount) {
+
+  target.hp -= amount;
+
+  createDamageText(
+    target.x,
+    target.y,
+    amount
+  );
+
+  damageTaken(target, attacker, amount);
+  damageDealt(attacker, target, amount);
 }
 
 
@@ -345,38 +387,23 @@ player2.physicsVy
 
     ) {
 
-        if(!p1Evade){
-
         // player1 recebe dano reduzido
-        player1.hp -=
-        damageP2 * WINNER_DAMAGE_REDUCTION;
-
-        createDamageText(
-
-            player1.x,
-
-            player1.y,
-
-            damageP2 *
-            WINNER_DAMAGE_REDUCTION
-        );
-    }
-
-if(!p2Evade){
+        if (!p1Evade) {
+            unarmedHit(
+                player2,
+                player1,
+                damageP2 * WINNER_DAMAGE_REDUCTION
+            );
+        }
 
         // player2 recebe dano total
-        player2.hp -=
-        damageP1;
-
-        createDamageText(
-
-            player2.x,
-
-            player2.y,
-
-            damageP1
-        );
-    }
+        if (!p2Evade) {
+            unarmedHit(
+                player1,
+                player2,
+                damageP1
+            );
+        }
 
         result = "player1Win 🔴";
     }
@@ -391,38 +418,23 @@ if(!p2Evade){
 
     ) {
 
-        if(!p2Evade){
-
         // player2 recebe dano reduzido
-        player2.hp -=
-        damageP1 * WINNER_DAMAGE_REDUCTION;
-
-        createDamageText(
-
-            player2.x,
-
-            player2.y,
-
-            damageP1 *
-            WINNER_DAMAGE_REDUCTION
-        );
-    }
-
-    if(!p1Evade){
+        if (!p2Evade) {
+            unarmedHit(
+                player1,
+                player2,
+                damageP1 * WINNER_DAMAGE_REDUCTION
+            );
+        }
 
         // player1 recebe dano total
-        player1.hp -=
-        damageP2;
-
-        createDamageText(
-
-            player1.x,
-
-            player1.y,
-
-            damageP2
-        );
-    }
+        if (!p1Evade) {
+            unarmedHit(
+                player2,
+                player1,
+                damageP2
+            );
+        }
 
         result = "player2Win 🔵";
     }
@@ -431,40 +443,23 @@ if(!p2Evade){
     // EMPATE
     else {
 
-        if(!p1Evade){
+        // ambos recebem dano total
 
-        // player1 recebe dano total
-        player1.hp -=
-        damageP2;
+        if (!p1Evade) {
+            unarmedHit(
+                player2,
+                player1,
+                damageP2
+            );
+        }
 
-        createDamageText(
-
-            player1.x,
-
-            player1.y,
-
-            damageP2
-        );
-    }
-    
-
-    
-if(!p2Evade){
-
-        // player2 recebe dano total
-        player2.hp -=
-        damageP1;
-
-        createDamageText(
-
-            player2.x,
-
-            player2.y,
-
-            damageP1
-        );
-    }
-
+        if (!p2Evade) {
+            unarmedHit(
+                player1,
+                player2,
+                damageP1
+            );
+        }
     }
 
     // ======================

@@ -1,7 +1,6 @@
 
 
 
-
 ///funcao para verificar se a passiva pode ser stivada
 function Passive(player) {
 
@@ -28,20 +27,30 @@ function Passive(player) {
 
 
 //funcao para ativar a skill active
+//
+// Devolve true se a skill foi ativada e false se não pôde ser usada.
+// Quem chama (addActiveMeter) só zera a barra quando devolve true.
+//
+// Cada skillFunction[nome].active devolve false quando não consegue
+// ativar; qualquer outro retorno (inclusive undefined) conta como sucesso.
 
 function Active(player){
 
-     if(IsStunned(player)){
-    return;
-}
+    if(IsStunned(player)){
+        return false;
+    }
 
+    const characterName = player.character.name;
 
-    console.log("active", player.character.name)
-const characterName = player.character.name;
+    const result = skillFunction[characterName].active(player);
 
-skillFunction[characterName].active(player);
+    if(result === false){
+        return false;
+    }
 
+    console.log("active", characterName);
 
+    return true;
 }
 
 
@@ -56,11 +65,11 @@ function ultimate(){
 
 function updateSkills(player) {
 
-   
+
 
         Passive(player);
 
-    
+
 
     }
 

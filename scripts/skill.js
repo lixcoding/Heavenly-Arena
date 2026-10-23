@@ -17,7 +17,7 @@ const skill = {
     Lance: {
    
         passive: {
-            name: "BloodThirsty",
+            name: "vampirism",
             trigger: "weaponHit"
         },
         active: {

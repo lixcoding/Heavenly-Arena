@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heavenly Arena — Seleção</title>
+  <link rel="stylesheet" href="../css/selectCharacter.css">
+</head>
+<body>
+
+  <main class="select-screen" id="screen" data-active="1">
+
+    <!-- ======================================================
+         FUNDO (só decoração)
+    ======================================================= -->
+    <div class="bg" aria-hidden="true">
+      <div class="bg-photo"></div>
+      <div class="bg-panel p1"></div>
+      <div class="bg-panel p2"></div>
+      <div class="bg-bokeh"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="bg-sheen"></div>
+      <div class="bg-vignette"></div>
+    </div>
+
+
+    <!-- ======================================================
+         ABAS DOS CANTOS: trocam quem está escolhendo
+    ======================================================= -->
+    <button type="button" class="edge-tab edge-tab-p1" id="tab-p1" aria-label="Escolher o lutador do Jogador 1">
+      <span class="tab-num">1</span><small>TROCAR</small>
+    </button>
+    <button type="button" class="edge-tab edge-tab-p2" id="tab-p2" aria-label="Escolher o lutador do Jogador 2">
+      <span class="tab-num">2</span><small>TROCAR</small>
+    </button>
+
+
+    <!-- ======================================================
+         TOPO
+    ======================================================= -->
+    <header class="select-header">
+
+      <div class="header-left">
+        <button type="button" class="btn btn-back" id="btn-back">‹ Voltar</button>
+      </div>
+
+      <div class="match-info">
+        <div class="match-stats">
+          <span><small>Modo</small><b id="mode-short">—</b></span>
+        </div>
+        <div class="match-turn">
+          <small id="turn-sub">ESCOLHA SEU LUTADOR</small>
+          <strong id="turn-label">PLAYER 1</strong>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button type="button" class="btn btn-sound" id="btn-sound" aria-pressed="true" title="Som (M)">♪ Som: on</button>
+        <span class="mode-badge" id="mode-label"></span>
+      </div>
+
+    </header>
+
+
+    <!-- ======================================================
+         PLAYER 1  x  PLAYER 2
+    ======================================================= -->
+    <section class="select-vs" aria-label="Seleção de lutadores">
+
+      <!-- ====================== PLAYER 1 ====================== -->
+      <section class="side side-p1" id="side-p1" aria-label="Jogador 1">
+
+        <div class="character-art" id="preview-p1">
+          <div class="art-brackets"></div>
+          <div class="art-stage" id="stage-p1">
+            <div class="art-frame"><img class="preview-img" id="preview-img-p1" alt=""></div>
+            <div class="art-placeholder" id="placeholder-p1" hidden></div>
+          </div>
+        </div>
+
+        <div class="ready-stamp">PRONTO</div>
+
+        <button type="button" class="player-label" id="label-p1" aria-label="Trocar o lutador do Player 1">
+          <span>PLAYER 1</span><em id="state-p1">ESCOLHENDO</em>
+        </button>
+
+        <div class="name-wrap">
+          <div class="fighter-name fighter-name-p1"><span id="preview-name-p1">PLAYER 1</span></div>
+        </div>
+
+        <div class="fighter-meta">
+          <span class="meta-style" id="style-p1">—</span>
+          <div class="meta-skills">
+            <span><b>PASSIVA</b><i id="passive-p1">—</i></span>
+            <span><b>ATIVA</b><i id="active-p1">—</i></span>
+          </div>
+          <div class="stats">
+            <div class="stat"><span>HP</span><div class="stat-bar"><i id="bar-hp-p1"></i></div><em id="val-hp-p1">—</em></div>
+            <div class="stat"><span>PODER</span><div class="stat-bar"><i id="bar-power-p1"></i></div><em id="val-power-p1">—</em></div>
+            <div class="stat"><span>VEL</span><div class="stat-bar"><i id="bar-speed-p1"></i></div><em id="val-speed-p1">—</em></div>
+          </div>
+        </div>
+
+      </section>
+
+
+      <div class="versus" aria-label="versus"><span>V</span><span>S</span></div>
+
+
+      <!-- ====================== PLAYER 2 ====================== -->
+      <section class="side side-p2" id="side-p2" aria-label="Jogador 2">
+
+        <div class="character-art" id="preview-p2">
+          <div class="art-brackets"></div>
+          <div class="art-stage" id="stage-p2">
+            <div class="art-frame"><img class="preview-img" id="preview-img-p2" alt=""></div>
+            <div class="art-placeholder" id="placeholder-p2" hidden></div>
+          </div>
+        </div>
+
+        <div class="ready-stamp">PRONTO</div>
+
+        <button type="button" class="player-label" id="label-p2" aria-label="Trocar o lutador do Player 2">
+          <span>PLAYER 2</span><em id="state-p2">AGUARDANDO</em>
+        </button>
+
+        <div class="name-wrap">
+          <div class="fighter-name fighter-name-p2"><span id="preview-name-p2">PLAYER 2</span></div>
+        </div>
+
+        <div class="fighter-meta">
+          <span class="meta-style" id="style-p2">—</span>
+          <div class="meta-skills">
+            <span><b>PASSIVA</b><i id="passive-p2">—</i></span>
+            <span><b>ATIVA</b><i id="active-p2">—</i></span>
+          </div>
+          <div class="stats">
+            <div class="stat"><span>HP</span><div class="stat-bar"><i id="bar-hp-p2"></i></div><em id="val-hp-p2">—</em></div>
+            <div class="stat"><span>PODER</span><div class="stat-bar"><i id="bar-power-p2"></i></div><em id="val-power-p2">—</em></div>
+            <div class="stat"><span>VEL</span><div class="stat-bar"><i id="bar-speed-p2"></i></div><em id="val-speed-p2">—</em></div>
+          </div>
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- ======================================================
+         LISTA DE PERSONAGENS
+    ======================================================= -->
+    <section class="roster-area" aria-label="Lista de personagens">
+
+      <div class="roster-heading">
+        <span>SELECIONE SEU LUTADOR</span>
+        <button type="button" id="btn-random" class="random-button"><kbd>R</kbd><span>ALEATÓRIO</span></button>
+        <span class="roster-count" id="roster-count">00 LUTADORES</span>
+      </div>
+
+      <div class="roster" id="roster">
+        <div class="roster-cursor" id="roster-cursor" aria-hidden="true"></div>
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         RODAPÉ
+    ======================================================= -->
+    <footer class="select-footer">
+
+      <div class="hint-area">
+        <p id="selection-hint" aria-live="polite">Player 1: escolha seu lutador</p>
+        <div class="keys" aria-hidden="true">
+          <span><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd>mover</span>
+          <span><kbd>Enter</kbd>escolher</span>
+          <span><kbd>Esc</kbd>desfazer</span>
+          <span><kbd>R</kbd>aleatório</span>
+          <span><kbd>M</kbd>som</span>
+        </div>
+      </div>
+
+      <div class="footer-actions">
+        <button type="button" class="btn btn-undo" id="btn-undo" disabled>↶ Desfazer</button>
+        <div class="start-wrap">
+          <button type="button" class="btn-start" id="btn-start" disabled>LUTAR ↗</button>
+        </div>
+      </div>
+
+    </footer>
+
+
+    <!-- ======================================================
+         TRANSIÇÃO AO INICIAR A LUTA
+    ======================================================= -->
+    <div class="screen-wipe" aria-hidden="true">
+      <span class="wipe wipe-p1"><em id="wipe-name-p1"></em></span>
+      <span class="wipe wipe-p2"><em id="wipe-name-p2"></em></span>
+      <b>VS</b>
+    </div>
+
+  </main>
+
+  <script src="../scripts/selecao.js"></script>
+</body>
+</html>

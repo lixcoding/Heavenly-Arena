@@ -26,3 +26,17 @@ versao 0.14
 
 
 
+gamefeel:
+
+screen shake ao levar dano
+
+particulas de colisao + soundeffect
+
+
+hitstop / freeze frame com criticos ou habilidades
+
+"• Os devs recomendam usar curvas de transição (easing functions). Se um menu abre, ele deve surgir com um leve efeito de mola (elastic ease out). Se uma moeda é coletada, ela deve esticar e sumir gradualmente.
+• Isso faz com que o jogo pareça orgânico e menos "estático" ou puramente"
+
+
+arrumar interrogacao pq e do sistema de design la q u desissti

@@ -28,7 +28,9 @@ function createPlayer(character, x, y, vx, vy) {
     radius: character.radius,
 
 // movement archtype
-   sub_archetype: character.sub_archetype,
+   // cópia por jogador: skills como a do Lance alteram o cooldown,
+   // e isso não pode afetar o objeto global em sub_archetypes
+   sub_archetype: { ...character.sub_archetype },
    sub_archetypeObject: {
     timer: character.sub_archetype.cooldown
 
@@ -154,9 +156,45 @@ function createPlayerWeapon(character) {
 
     return weapon;
 }
-const selectedCharacterP1 = 2;
+// ======================
+// PERSONAGENS ESCOLHIDOS
+// ======================
 
-const selectedCharacterP2 = 1;
+// A tela de seleção (selecao.html) grava a posição do personagem em
+// `characters` no sessionStorage. Sem escolha salva (ou com valor
+// inválido) usamos o personagem padrão, então o jogo continua
+// abrindo direto pelo game.html.
+
+function readSelectedCharacter(key, fallback) {
+
+  let raw = null;
+
+  try {
+    raw = sessionStorage.getItem(key);
+  } catch (error) {
+    return fallback;
+  }
+
+  if (raw === null) {
+    return fallback;
+  }
+
+  const index = Number(raw);
+
+  if (
+    !Number.isInteger(index) ||
+    index < 0 ||
+    index >= characters.length
+  ) {
+    return fallback;
+  }
+
+  return index;
+}
+
+const selectedCharacterP1 = readSelectedCharacter("selectedCharacterP1", 2);
+
+const selectedCharacterP2 = readSelectedCharacter("selectedCharacterP2", 1);
 
 const player1 = createPlayer(
   characters[selectedCharacterP1],
@@ -182,3 +220,38 @@ const player2 = createPlayer(
 );
 
 player2.color = "blue";
+
+
+// ======================
+// PORTRAITS DO HUD
+// ======================
+
+// O game.html traz um portrait fixo em cada lado do HUD.
+// Aqui ele passa a mostrar o personagem realmente escolhido
+// (campo hudPortrait em characters.js). Personagem sem
+// hudPortrait fica sem imagem em vez de mostrar o de outro.
+
+function applyHudPortrait(player, elementId) {
+
+  const element = document.getElementById(elementId);
+
+  if (!element) {
+    return;
+  }
+
+  const source = player.character.hudPortrait;
+
+  if (source) {
+
+    element.src = source;
+    element.style.visibility = "visible";
+
+  } else {
+
+    element.removeAttribute("src");
+    element.style.visibility = "hidden";
+  }
+}
+
+applyHudPortrait(player1, "portrait-p1");
+applyHudPortrait(player2, "portrait-p2");

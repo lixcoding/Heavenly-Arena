@@ -27,14 +27,14 @@ Van: {
 
 
      const target = event.target;
-     
+
         if(target.stats.unarmedDamage === 0){
 player.hp += target.weapon.damage;
         }
         else{
           player.hp += target.stats.unarmedDamage;
         }
-        
+
 
         if (player.hp > player.maxHp) {
           player.hp = player.maxHp;
@@ -51,13 +51,22 @@ player.hp += target.weapon.damage;
 
       const active = skill[characterName].active;
 
+      // skill já está ativa: não empilha os bônus
+      // (devolve false para a barra não ser gasta)
+      if (player.skillObjects.active) {
+        return false;
+      }
+
       player.skillObjects.active = {
         duration: active.duration,
         speedBonus: active.speedBonus,
         rotationBonus: active.rotationBonus,
         evadeBonus: active.evadeBonus,
         subArchetypeCooldown: 1,
-         BeforeSubArchetypeCooldown: 0
+
+        // cooldown original do sub_archetype,
+        // restaurado quando a skill acabar (UpdateLanceActive)
+        BeforeSubArchetypeCooldown: player.sub_archetype.cooldown
       };
 
       const activeObject = player.skillObjects.active;
@@ -69,26 +78,17 @@ player.hp += target.weapon.damage;
       player.stats.evade += activeObject.evadeBonus;
 
 
-    
-      
-    console.log("antes",player.sub_archetype.cooldown,
-      activeObject.BeforeSubArchetypeCooldown )
+      // durante a skill o comportamento é reavaliado todo frame.
+      // sub_archetype é uma cópia só deste jogador (players.js),
+      // então isso não afeta ninguém mais.
+      player.sub_archetype.cooldown = activeObject.subArchetypeCooldown;
 
-      activeObject.BeforeSubArchetypeCooldown += 
-    player.sub_archetype.cooldown
+      // reinicia o timer: sem isso o novo cooldown só valeria depois
+      // do timer antigo (até 300 frames) zerar, e a skill (180 frames)
+      // podia acabar sem o efeito acontecer.
+      player.sub_archetypeObject.timer = activeObject.subArchetypeCooldown;
 
-    
-    
-      
-    console.log("dps",player.sub_archetype.cooldown,
-      activeObject.BeforeSubArchetypeCooldown )
-
-    player.sub_archetype.cooldown = activeObject.subArchetypeCooldown;
-
-    
-      
-    console.log("mecanica, sub archetype:",player.sub_archetype.cooldown,
-      activeObject.BeforeSubArchetypeCooldown )
+      return true;
     },
 
     ultimate(player) {},
@@ -123,6 +123,9 @@ Stephany: {
         if (!target.effects.poison) {
 
             target.effects.poison = {
+                // quem aplicou o veneno (usado nos eventos de dano)
+                source: player,
+
                 damagePer: passive.damagePer,
                 maxDamagePer: passive.maxDamagePer,
                 minDamagePer: passive.minDamagePer,
@@ -160,9 +163,10 @@ Stephany: {
 
       const active = skill[characterName].active;
 
+      // sem veneno no alvo a skill não pode ser usada.
+      // false = a barra não é gasta (ver Active / addActiveMeter)
       if (!target.effects.poison) {
-        console.log("sem veno");
-        return;
+        return false;
       }
 
       target.effects.poison.maxDamagePer = active.poisonLimit;
@@ -187,7 +191,7 @@ Stephany: {
         duration: 10,
 
       };
-      
+
 
       ///// explosao
 
@@ -208,7 +212,7 @@ Stephany: {
         growth: 2,
         alpha: 0,
         maxAlpha: 0.5,
-      
+
       });
 
 
@@ -217,7 +221,8 @@ Stephany: {
         reqCounter: 3,
         stunTick: 30
       }
-      
+
+      return true;
     },
   },
 
