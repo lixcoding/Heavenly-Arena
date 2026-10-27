@@ -41,7 +41,8 @@ const ROSTER = [
   {
     index: 0,
     name: "Van",
-    sprite: null,
+    sprite: "../assets/portrait/van/selectsheet.png",
+    thumb: "../assets/portrait/lance/lanceDefaultPortrait.png",
     style: "Lutador",
     skills: { passive: "Rainbolt", active: "Shockwave" },
     stats: { hp: 120, power: 15, speed: 9 }

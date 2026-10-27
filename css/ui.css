@@ -254,3 +254,43 @@ clip-path: polygon(
 #skill-fill-p2 {
     left: 0;
 }
+
+.skill-slot {
+    position: absolute;
+    width: 7.5%;
+    aspect-ratio: 1;
+    z-index: 4;
+    border: 4px solid red;
+}
+
+.skill-slot-p1 { left: 15.5%;  top: 50%; }
+.skill-slot-p2 { right: 18%; top: 52%; }
+
+.skill-slot-icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* escondido por padrão */
+.skill-tooltip {
+    position: absolute;
+    top: -30%;
+    left: 0;
+    width: 260%;
+    padding: 10px 12px;
+    background: rgba(15, 15, 18, 0.95);
+    color: #eee;
+    font: 13px/1.4 Arial, sans-serif;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .15s, visibility .15s;
+    pointer-events: none;
+}
+
+.skill-slot:hover .skill-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
