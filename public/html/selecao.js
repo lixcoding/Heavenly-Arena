@@ -63,10 +63,8 @@ const ROSTER = [
     skills: { passive: "Toxic", active: "SludgeBomb" },
     stats: { hp: 100, power: 10, speed: 11 }
   },
-  { index: 3, name: "x", sprite: null },
-  { index: 4, name: "y", sprite: null },
-  { index: 5, name: "ellios", sprite: null }
-];
+  { index: 3, name: "ellios", sprite: null },
+]
 
 // valor máximo de cada status (a barra cheia)
 const STAT_MAX = { hp: 150, power: 15, speed: 11 };

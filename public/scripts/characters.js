@@ -263,4 +263,84 @@ const characters = [
       ultimate: null,
     },
   },
+  
+  
+  // C1 - Lance - SWORD USER
+
+  {
+     id: "ellios",
+    name: "Ellios Logan",
+    archetype: null,
+    portrait: assets.portraits.ellios ,
+    hudPortrait: "../assets/portrait/ellios/elliosFramePortrait.jpeg",
+    sub_archetype: sub_archetypes.elliosBehavior,
+    radius: SIZE.GIANT,
+
+    activeBar: 0,
+    activeBarMax: 100,
+
+    ultimateBar: 0,
+    ultimateBarMax: 100,
+
+    skillData: {},
+
+    FighterType: {
+      weightClass: "Medium",
+
+      knockbackResistance: WEIGHT.MEDIUM,
+    },
+
+    stats: {
+      hp: RESISTANCE_HP.FRAGILE,
+      maxHp: RESISTANCE_HP.FRAGILE,
+
+      unarmedDamage: 0,
+      power: POWER.WEAK_POWER,
+      unarmedCrit: 0,
+
+      evade: 0.05,
+      speed: SPEED.NORMAL_SPEED,
+      maxSpeed: null,
+    },
+
+    weapon: {
+       showHitbox: false,
+      type: "orbit",
+      name: "sword",
+  
+      pivotX:60,
+      pivotY: 80,
+
+
+      
+      sprite: assets.weapons.sword,
+      spriteWidth: 120,
+      spriteHeight: 120,
+
+     spriteAngle: 0.75,
+      hitbox: {
+        type: "capsule",
+       
+        length: 110,
+        radius: 12,
+      },
+
+      orbitRadius: 60,
+      rotationSpeed: 0.10,
+
+      damage: 3,
+      knockback: 2,
+      crit: 0.1,
+
+      originType: "edge",
+    },
+
+    skills: {
+      passive: "vampirism",
+      active: "SwordDance",
+      ultimate: null,
+    },
+  },
+
+
 ];
