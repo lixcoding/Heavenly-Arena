@@ -29,18 +29,6 @@ Abra `http://localhost:8080/`.
 
 > Evite abrir os HTML com duplo clique (`file://`). O comportamento difere de um servidor real, principalmente em caminhos e `sessionStorage`. O `.vscode/launch.json` já tem uma configuração para o Chrome em `localhost:8080`.
 
-## Deploy (Cloudflare Pages)
-
-Site estático, sem build:
-
-| Opção | Valor |
-|---|---|
-| Framework preset | `None` |
-| Build command | *(vazio)* |
-| Build output directory | `public` |
-
-O Cloudflare roda em Linux, e **maiúsculas e minúsculas importam** nos nomes de arquivo (`Stephany.png` ≠ `stephany.png`). Evite espaços e parênteses nos nomes.
-
 ---
 
 ## Personagens
