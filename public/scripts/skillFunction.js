@@ -22,7 +22,7 @@ Van: {
   Lance: {
     passive(player, event) {
       if (player.hp >= player.maxHp) {
-        return;
+        return false;
       } else {
 
 
@@ -102,44 +102,43 @@ Stephany: {
 
         const target = event.target;
 
-        if (!player.skillObjects.poisonHits) {
-            player.skillObjects.poisonHits = {
-                hit: 0,
-            };
+       const state = player.skillObjects.passive;
+
+        state.progress++;
+
+        console.log("hits:", state.progress);
+
+        if (state.progress < passive.req) {
+            return false;
         }
 
-        const poisonHits = player.skillObjects.poisonHits;
+        state.progress = 0;
 
-        poisonHits.hit++;
-
-        console.log("hits:", poisonHits.hit);
-
-        if (poisonHits.hit < passive.hitReq) {
-            return;
-        }
-
-        poisonHits.hit = 0;
 
         if (!target.effects.poison) {
 
-            target.effects.poison = {
-                // quem aplicou o veneno (usado nos eventos de dano)
-                source: player,
+    target.effects.poison = {
+        source: player,
 
-                damagePer: passive.damagePer,
-                maxDamagePer: passive.maxDamagePer,
-                minDamagePer: passive.minDamagePer,
-                tick: passive.tick,
-                tickRate: passive.tickRate,
-            };
+        damagePer: passive.damagePer,
+        maxDamagePer: passive.maxDamagePer,
+        minDamagePer: passive.minDamagePer,
+        tick: passive.tick,
+        tickRate: passive.tickRate,
+    };
 
-            return;
-        }
+} else {
 
-        target.effects.poison.damagePer = Math.min(
-            target.effects.poison.maxDamagePer,
-            target.effects.poison.damagePer + 0.01
-        );
+    target.effects.poison.damagePer = Math.min(
+        target.effects.poison.maxDamagePer,
+        target.effects.poison.damagePer + 0.01
+    );
+
+}
+
+// guarda o alvo envenenado
+player.skillObjects.poisonTarget = target;
+        
 
         console.log(
             "veneno evoluiu: " +
@@ -224,7 +223,8 @@ Stephany: {
 
       return true;
     },
-  },
+  
 
-  ultimate(player) {},
-};
+  ultimate(player) {}
+  }
+}

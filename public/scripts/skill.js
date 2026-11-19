@@ -4,6 +4,7 @@ const skill = {
    
         passive: {
             name: "Rainbolt",
+             description: "A cada colisão fica mais rapido.",
             trigger: "Collision"
         },
         active: {
@@ -17,8 +18,11 @@ const skill = {
     Lance: {
    
         passive: {
-            name: "vampirism",
+            name: "vampirism",     
+             description: "Ao acertar um golpe, recupera vida proporcional ao dano do inimigo.",
             trigger: "weaponHit"
+        
+        
         },
         active: {
             name: "Sword Dance",
@@ -36,8 +40,15 @@ const skill = {
    
          passive: {
             name: "Toxic",
+            description: "Envenena o adversario ao acertar 5 golpes.",
             trigger: "weaponHit",
-            hitReq: 5,
+            icon: "../assets/skills/skillicon/stephanny/toxic.png",
+
+
+            req: 5,
+            
+
+
                damagePer: 0.01,
                maxDamagePer: 0.075,
                minDamagePer: 0.5,

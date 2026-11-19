@@ -108,12 +108,15 @@ function render() {
     drawPlayerHp(player1);
 updateHpBar(player1, hpP1)
 updateActiveBar(player1, activeP1)
-
+updatePassiveSlot(player1, slotP1)
      
     drawPlayer(player2);
     drawPlayerHp(player2);
 updateHpBar(player2, hpP2)
 updateActiveBar(player2, activeP2)
+updatePassiveSlot(player2, slotP2)
+
+
     drawWeapon(player1);
     drawWeapon(player2);
 

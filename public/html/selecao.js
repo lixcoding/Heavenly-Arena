@@ -52,7 +52,7 @@ const ROSTER = [
     name: "Lance",
     sprite: "../assets/portrait/lance/lanceDefaultPortrait.png",
     style: "archetype: BloodThirsty",
-    skills: { passive: "Vampirism", active: "Sword Dance" },
+    s: { passive: "Vampirism", active: "Sword Dance" },
     stats: { hp: 100, power: 5, speed: 7 }
   },
   {

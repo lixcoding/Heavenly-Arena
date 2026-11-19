@@ -15,10 +15,18 @@ function Passive(player) {
 
         console.log(event.type);
 
-        skillFunction[characterName].passive(
+
+        const result = skillFunction[characterName].passive(
             player,
             event
         );
+
+        // false = a passiva não fez efeito (ex.: ainda não chegou em 5/5)
+        if (result === false) {
+            continue;
+        }
+
+        player.skillObjects.passive.activations++;
     }
 }
 
@@ -74,4 +82,25 @@ function updateSkills(player) {
     }
 
 
+function getPassiveView(player) {
 
+    const passive = skill[player.character.name]?.passive;
+
+    if (!passive) {
+        return null;
+    }
+
+    const state = player.skillObjects.passive;
+
+    return {
+        name: passive.name,
+        description: passive.description || "",
+        icon: passive.icon || null,
+
+        progress: passive.req
+            ? { current: state?.progress ?? 0, required: passive.req }
+            : null,
+
+        activations: state?.activations ?? 0
+    };
+}

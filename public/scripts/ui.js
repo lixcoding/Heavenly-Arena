@@ -174,7 +174,79 @@ function drawActiveBar(player, x, y){
 }
 
 
+const slotP1 = document.getElementById("skillSlot-p1");
+const slotP2 = document.getElementById("skillSlot-p2");
 
+
+function flashPassiveSlot(slot) {
+    slot.classList.remove("activated");
+    void slot.offsetWidth;
+    slot.classList.add("activated");
+}
+
+function updatePassiveSlot(player, slot) {
+
+    const view = getPassiveView(player);
+    // "assinatura": um texto curto que resume TUDO que o slot mostra.
+    // Se for igual à da última vez, não há nada novo para desenhar.
+    const signature = view
+        ? view.name + "|" +
+          (view.progress
+              ? view.progress.current + "/" + view.progress.required
+              : "-") + "|" +
+          view.activations
+        : "none";
+
+            const activations = view ? view.activations : 0;
+
+    if (activations > Number(slot.dataset.activations || 0)) {
+        flashPassiveSlot(slot);
+    }
+
+    slot.dataset.activations = activations;
+
+    
+    if (slot.dataset.signature === signature) {
+
+        return;
+        
+    }
+
+    slot.dataset.signature = signature;
+
+    // personagem sem passiva: esconde o slot
+    if (!view) {
+        slot.style.visibility = "hidden";
+        return;
+    }
+
+    slot.style.visibility = "visible";
+
+    const nameElement = slot.querySelector(".skill-tooltip strong");
+    const descriptionElement = slot.querySelector(".skill-tooltip p");
+    const iconElement = slot.querySelector(".skill-slot-icon");
+
+    nameElement.textContent = view.name;
+    descriptionElement.textContent = view.description;
+
+  if (view.icon) {
+        iconElement.src = view.icon;
+        iconElement.hidden = false;
+    } else {
+        iconElement.removeAttribute("src");
+        iconElement.hidden = true;
+    }
+
+    const progressElement = slot.querySelector(".skill-slot-progress");
+
+    if (view.progress) {
+        progressElement.textContent =
+            view.progress.current + "/" + view.progress.required;
+        progressElement.hidden = false;
+    } else {
+        progressElement.hidden = true;
+    }
+}
 const hpP1 =
     document.getElementById("hp-fill-p1");
 

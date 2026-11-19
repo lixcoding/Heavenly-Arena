@@ -61,7 +61,10 @@ function createPlayer(character, x, y, vx, vy) {
       poisonPool: [],
     },
 
-    skillObjects: {},
+    skillObjects: {
+ 
+      passive: { progress: 0, activations: 0 },
+    },
 
     effects: {},
     

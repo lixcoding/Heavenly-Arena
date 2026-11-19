@@ -506,9 +506,9 @@ player2.physicsVy
     const active2 = skill[player2.character.name].active
 
 
-addActiveMeter(player1, player1.active1.chargeHit)
+addActiveMeter(player1, active1.chargeHit)
 
-addActiveMeter(player2, player2.active2.chargeHit)
+addActiveMeter(player2, active2.chargeHit)
 
 
     return result;
